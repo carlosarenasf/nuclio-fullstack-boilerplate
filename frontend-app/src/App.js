@@ -1,11 +1,10 @@
 import React from 'react';
 import './App.css';
-import ProductList from "./views/ProductList/PokemonList";
-import {APP_PRODUCT_ID, APP_PRODUCTS, LOGIN, RETRIEVE_DATA_EXAMPLE} from "./routes/routes";
+import ProductList from "./views/Pokemons/PokemonList";
+import {APP_PRODUCT_ID, APP_PRODUCTS, APP_ROOT} from "./routes/routes";
 import {  BrowserRouter , Route } from 'react-router-dom';
-import Login from "./views/Login/Login";
-import RetrieveDataExample from "./views/RetrieveDataExample";
-import Pokemon from "./views/ProductList/Pokemon";
+import Example from "./views/Example";
+import Pokemon from "./views/Pokemons/Pokemon";
 
 function App() {
 
@@ -13,6 +12,7 @@ function App() {
     <BrowserRouter>
       <Route exact path={APP_PRODUCTS}  component={ProductList} />
       <Route exact path={APP_PRODUCT_ID}  component={Pokemon} />
+      <Route exact path={APP_ROOT}  component={Example} />
     </BrowserRouter>
   );
 }

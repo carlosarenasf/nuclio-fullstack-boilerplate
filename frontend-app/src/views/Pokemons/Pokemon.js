@@ -1,14 +1,15 @@
 import React, {useEffect, useState} from 'react';
-import {Link, withRouter} from 'react-router-dom';
-import Button from '@material-ui/core/Button';
+import {TextField} from "@material-ui/core";
+import {useParams} from "react-router-dom";
 
-function PokemonList({history}) {
-  const [pokemonsData, setPokemonsData] = useState([]);
-  const [error, setError] = useState(false);
+function Pokemon(props) {
+
+  let { name } = useParams();
+  const [pokemon, setPokemon] = useState();
 
   useEffect(() => {
     const fetchData = async () => {
-      const url = 'https://pokeapi.co/api/v2/pokemon/?limit=20';
+      const url = `https://pokeapi.co/api/v2/pokemon/${name}`;
       const options = {
         method: 'GET',
         headers: new Headers({
@@ -28,26 +29,23 @@ function PokemonList({history}) {
         })
         .then(data => {
           debugger;
-          setPokemonsData(data.results);
+          setPokemon(data);
         })
-        .catch(error => setError(true));
+        .catch(error => console.log(error));
     };
-
-    setError(false);
 
     fetchData();
 
   }, []);
 
-  debugger;
-  return (
-    <div>
-      {pokemonsData && pokemonsData.map(p => (
-        <Button onClick={() => history.push(`/products/${p.name}`)}>{p.name}</Button>
 
-      ))}
+  debugger;
+  return pokemon ? (
+    <div>
+      <h3>Pokemon name: {pokemon.name}</h3>
+      <p>Base experience: {pokemon.base_experience}</p>
     </div>
-  );
+  ) : <h1>Empty</h1>;
 }
 
-export default withRouter(PokemonList);
+export default Pokemon;

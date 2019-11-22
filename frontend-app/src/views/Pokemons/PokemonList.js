@@ -1,14 +1,14 @@
-import React, { useState, useEffect } from 'react';
-import {TextField} from "@material-ui/core";
+import React, {useEffect, useState} from 'react';
+import {Link, withRouter} from 'react-router-dom';
+import Button from '@material-ui/core/Button';
 
-function RetrieveDataExample(props) {
-  const [data, setData] = useState({});
+function PokemonList({history}) {
+  const [pokemonsData, setPokemonsData] = useState([]);
   const [error, setError] = useState(false);
-  const [idPokemon, setIdPokemon] = useState(1);
 
   useEffect(() => {
     const fetchData = async () => {
-      const url = `https://pokeapi.co/api/v2/pokemon/${idPokemon}/`;
+      const url = 'https://pokeapi.co/api/v2/pokemon/?limit=20';
       const options = {
         method: 'GET',
         headers: new Headers({
@@ -26,7 +26,10 @@ function RetrieveDataExample(props) {
           }
           return Promise.reject(response.status);
         })
-        .then(data => setData(data))
+        .then(data => {
+          debugger;
+          setPokemonsData(data.results);
+        })
         .catch(error => setError(true));
     };
 
@@ -34,18 +37,16 @@ function RetrieveDataExample(props) {
 
     fetchData();
 
-  }, [idPokemon]);
+  }, []);
 
-
+  debugger;
   return (
     <div>
-      <h3>{data && data.name}</h3>
-      <p>{data && data.height}</p>
-      {error && (<h1>Error</h1>)}
-
-      <input type="text" value={idPokemon} onChange={e => setIdPokemon(e.target.value)} />
+      {pokemonsData && pokemonsData.map(p => (
+        <Button onClick={() => history.push(`/products/${p.name}`)}>{p.name}</Button>
+      ))}
     </div>
   );
 }
 
-export default RetrieveDataExample;
+export default withRouter(PokemonList);
