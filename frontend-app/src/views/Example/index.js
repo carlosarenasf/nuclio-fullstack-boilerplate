@@ -12,12 +12,25 @@ function Index(props) {
   const swapCase = input => {
     return input.split(" ")
       .map((w, i) => i % 2 === 0 ? w.toUpperCase() : w)
-      .reduce((acc, curr) => `${acc} ${curr}`);
+      .reduce((acc, curr) => {
+        return `${acc} ${curr}`;
+      });
   };
 
   //Example: hola estudiar react mola mucho / {h: 2, o: 3, l: 2, a: 4, " ": 4, …}
   const countLetters = input => {
     //Code here
+    return input
+      .split("")
+      .reduce((acc, curr) => {
+        if(acc[curr]) {
+          acc[curr] = acc[curr] + 1;
+        } else {
+          acc[curr] = 1;
+        }
+        return acc;
+      }, {});
+    debugger;
   };
 
   useEffect(() => {
