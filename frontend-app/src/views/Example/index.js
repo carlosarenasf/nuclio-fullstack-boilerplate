@@ -3,9 +3,7 @@ import React, {useEffect, useState} from 'react';
 function Index(props) {
   //Example: hola estudiar react mola mucho / Hola Estudiar React Mola Mucho
   const capitelize = input => {
-    const result = input;
-    //Code here
-    return result;
+    return input.split(" ").map(w => w.charAt(0).toUpperCase() + w.substring(1)).reduce((acc, curr) => `${acc} ${curr}`);
   };
 
   //Example: hola estudiar react mola mucho / HOLA estudiar REACT mola MUCHO
