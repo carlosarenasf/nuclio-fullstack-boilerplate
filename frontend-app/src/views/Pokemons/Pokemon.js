@@ -8,34 +8,7 @@ function Pokemon(props) {
   const [pokemon, setPokemon] = useState();
 
   useEffect(() => {
-    const fetchData = async () => {
-      const url = `https://pokeapi.co/api/v2/pokemon/${name}`;
-      const options = {
-        method: 'GET',
-        headers: new Headers({
-          Accept: 'application/json',
-          'Access-Control-Allow-Headers': 'Authorization',
-          'Content-Type': 'application/json',
-        }),
-        mode: 'cors',
-      };
-
-      return fetch(url, options)
-        .then(response => {
-          if (response.status === 200) {
-            return response.json();
-          }
-          return Promise.reject(response.status);
-        })
-        .then(data => {
-          debugger;
-          setPokemon(data);
-        })
-        .catch(error => console.log(error));
-    };
-
-    fetchData();
-
+   //your code here
   }, []);
 
 
