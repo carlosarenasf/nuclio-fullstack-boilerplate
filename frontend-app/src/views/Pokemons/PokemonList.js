@@ -1,10 +1,34 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useReducer, useState} from 'react';
 import {Link, withRouter} from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 
-function PokemonList({history}) {
+function PokemonList(props) {
+  const history = props.history;
+
+  const SET_POKEMON_DATA = 'SET_POKEMON_DATA';
+  const SET_ERROR = 'SET_ERROR';
+
+  const initialState = {
+    pokemonData: [],
+    error: false,
+  };
+
+  const pokemonReducer = (state = initialState, action) => {
+    const newState = { ...state };
+    const { type } = { ...action };
+
+    if (type === SET_POKEMON_DATA) {
+      newState.pokemonData = action.data;
+    }
+    if (type === SET_ERROR) {
+      newState.error = action.error;
+    }
+    return newState;
+  };
+
   const [pokemonsData, setPokemonsData] = useState([]);
   const [error, setError] = useState(false);
+  const [state, dispatch] = useReducer(pokemonReducer, initialState);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -28,12 +52,12 @@ function PokemonList({history}) {
         })
         .then(data => {
           debugger;
-          setPokemonsData(data.results);
+          dispatch({ type: SET_POKEMON_DATA, data: data.results });
         })
-        .catch(error => setError(true));
+        .catch(error => dispatch({ type: SET_ERROR, error: true }));
     };
 
-    setError(false);
+    dispatch({ type: SET_ERROR, error: false });
 
     fetchData();
 
@@ -42,7 +66,7 @@ function PokemonList({history}) {
   debugger;
   return (
     <div>
-      {pokemonsData && pokemonsData.map(p => (
+      {state.pokemonData && state.pokemonData.map(p => (
         <Button onClick={() => history.push(`/products/${p.name}`)}>{p.name}</Button>
       ))}
     </div>
