@@ -5,6 +5,7 @@ import PinCardActionsView from "./pinCardActions/pinCardActions.view";
 
 const PinCard = ({description, image_url, name }) => {
     const [isHovered, setIsHovered] = useState(false);
+
     return (
         <div
             className={styles.__container}
