@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import styles from './pinForm.module.css';
+import {getToken} from "../../utils/localStorage.utils";
 
 const PinForm = () => {
   const [note, setNote] = useState('');
@@ -18,7 +19,8 @@ const PinForm = () => {
     const options = {
       method: 'POST',
       headers: new Headers({
-        'Content-type': 'application/json'
+        'Content-type': 'application/json',
+        'authorization': `Bearer ${getToken()}`
       }),
       mode: 'cors',
       body: JSON.stringify(body),
