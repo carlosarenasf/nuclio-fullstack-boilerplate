@@ -3,3 +3,9 @@ export const LIST_PINS = '/listPins';
 export const PINS_FORM = '/pinForm';
 export const BOARD_FORM = '/boardForm';
 export const BOARD = '/board/:id';
+export const PIN_ID = '/pin/:id';
+export const PIN = '/pin/';
+
+
+
+localhost/pinsForm/3
