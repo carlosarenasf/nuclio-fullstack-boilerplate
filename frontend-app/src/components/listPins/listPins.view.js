@@ -1,11 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import styles from './listPins.module.css';
 import PinCard from "../pinCard/pinCard.view";
+import {Link, useHistory, useLocation} from "react-router-dom";
+import {PIN} from "../../routes/routes";
 
 const ListPins = () => {
 
   const [pins, setPins] = useState([]);
+  const { history } = useHistory();
+  const { location } = useLocation();
 
+  const goToPin = (id) => {
+    history.push(PIN + id);
+  }
 
   useEffect(() => {
     const url = 'https://sheetdb.io/api/v1/4mueuudmwry9n';
@@ -35,11 +42,15 @@ const ListPins = () => {
     <div>
       {pins && pins.map(pin => {
         return (
-          <PinCard
-            name={pin.name}
-            description={pin.description}
-            image_url={pin.img_url}
-          />
+          <>
+            <div onClick={() => goToPin(pin.id)}>
+              <PinCard
+                name={pin.name}
+                description={pin.description}
+                image_url={pin.img_url}
+              />
+            </div>
+          </>
         );
       })}
     </div>
