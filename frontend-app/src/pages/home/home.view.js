@@ -1,33 +1,33 @@
-import React, {useEffect, useState} from 'react';
-import {deleteToken, getToken, setJWT} from "../../utils/localStorage.utils";
+import React, { useEffect, useState } from 'react';
+import { deleteToken, getToken, setJWT } from '../../utils/localStorage.utils';
 
 const Home = () => {
-  const [token, setToken] = useState({});
-  const [reloadToken, setReloadToken] = useState(false);
+    const [token, setToken] = useState({});
+    const [reloadToken, setReloadToken] = useState(false);
 
-  useEffect(() => {
-    const tokenLS = getToken();
-    setToken(tokenLS);
-  }, [reloadToken])
+    useEffect(() => {
+        const tokenLS = getToken();
+        setToken(tokenLS);
+    }, [reloadToken]);
 
-  const saveToken = () => {
-    setJWT('test_token');
-    setReloadToken(!reloadToken)
-  };
+    const saveToken = () => {
+        setJWT('test_token');
+        setReloadToken(!reloadToken);
+    };
 
-  const removeToken = () => {
-    deleteToken();
-    setReloadToken(!reloadToken);
-  }
+    const removeToken = () => {
+        deleteToken();
+        setReloadToken(!reloadToken);
+    };
 
-  return (
-    <div>
-      <h1>Pinterest home</h1>
-      <p>{token.token}</p>
-      <input type="button" onClick={saveToken} value="SAVE TOKEN"/>
-      <input type="button" onClick={removeToken} value="REMOVE TOKEN"/>
-    </div>
-  );
+    return (
+        <div>
+            <h1>Pinterest home</h1>
+            <p>{token.token}</p>
+            <input type="button" onClick={saveToken} value="SAVE TOKEN" />
+            <input type="button" onClick={removeToken} value="REMOVE TOKEN" />
+        </div>
+    );
 };
 
 export default Home;
