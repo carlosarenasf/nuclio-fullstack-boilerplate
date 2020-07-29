@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from 'react';
-import styles from './home.module.css';
 import {deleteToken, getToken, setJWT} from "../../utils/localStorage.utils";
 
 const Home = () => {
@@ -22,11 +21,11 @@ const Home = () => {
   }
 
   return (
-    <div className={styles.__home_container}>
+    <div>
       <h1>Pinterest home</h1>
       <p>{token.token}</p>
-      <input type={'button'} onClick={saveToken} value={'SAVE TOKEN'}/>
-      <input type={'button'} onClick={removeToken} value={'REMOVE TOKEN'}/>
+      <input type="button" onClick={saveToken} value="SAVE TOKEN"/>
+      <input type="button" onClick={removeToken} value="REMOVE TOKEN"/>
     </div>
   );
 };

@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import styles from './listPins.module.css';
 import PinCard from "../pinCard/pinCard.view";
 
 const ListPins = () => {
@@ -38,7 +37,7 @@ const ListPins = () => {
           <PinCard
             name={pin.name}
             description={pin.description}
-            image_url={pin.img_url}
+            imageUrl={pin.img_url}
           />
         );
       })}

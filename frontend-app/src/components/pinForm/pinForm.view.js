@@ -33,7 +33,7 @@ const PinForm = () => {
           return Promise.reject(response.status);
         }
       )
-      .then(payload => {
+      .then(() => {
           console.log("saved");
         }
       )
@@ -64,22 +64,25 @@ const PinForm = () => {
   }, []);
 
   return (
+      // eslint-disable-next-line no-underscore-dangle
     <div className={styles.__container}>
-      <label for="note-form">Note</label>
-      <input id="note-form" type={"text"} value={note} onChange={e => setNote(e.target.value)} />
+        {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
+      <label htmlFor="note-form">Note
+        <input id="note-form" type="text" value={note} onChange={e => setNote(e.target.value)} />
+      </label>
 
-      <label htmlFor="media-form">Media url</label>
-      <input id="media-form" type={"text"} value={mediaUrl} onChange={e => setMediaUrl(e.target.value)}/>
-
+      <label htmlFor="media-form">Media url
+        <input id="media-form" type="text" value={mediaUrl} onChange={e => setMediaUrl(e.target.value)}/>
+      </label>
       <select value={boardId} onChange={(e) => setBoardId(e.target.value)} >
         {
           boards.map((board) => {
-            return (<option key={'board-select' + board.id} value={board.id}>{board.name}</option>)
+            return (<option key={`board-select${  board.id}`} value={board.id}>{board.name}</option>)
           })
         }
       </select>
 
-      <input type={"button"} value={"Submit"} onClick={submitForm} />
+      <input type="button" value="Submit" onClick={submitForm} />
 
     </div>
   )

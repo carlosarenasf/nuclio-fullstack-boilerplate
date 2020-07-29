@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import styles from './pinCard.module.css';
 import PropTypes from 'prop-types';
+import styles from './pinCard.module.css';
 import PinCardActionsView from "./pinCardActions/pinCardActions.view";
 
-const PinCard = ({description, image_url, name }) => {
+const PinCard = ({description, imageUrl, name }) => {
     const [isHovered, setIsHovered] = useState(false);
 
     return (
@@ -13,7 +13,7 @@ const PinCard = ({description, image_url, name }) => {
             onMouseLeave={() => setIsHovered(false)}
         >
             <div className={styles.__image__container}>
-                <img src={image_url} className={styles.__image} alt="pinImage"/>
+                <img src={imageUrl} className={styles.__image} alt="pinImage"/>
                 {isHovered && <PinCardActionsView />}
             </div>
             <span className={styles.__pinName}>{name}</span>
@@ -26,8 +26,8 @@ const PinCard = ({description, image_url, name }) => {
 
 PinCard.propTypes = {
     description: PropTypes.string.isRequired,
-    image_url: PropTypes.string.isRequired,
-    name: PropTypes.array.isRequired,
+    imageUrl: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
 }
 
 export default PinCard;

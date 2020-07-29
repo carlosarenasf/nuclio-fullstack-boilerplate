@@ -1,11 +1,11 @@
 import React from 'react';
-import Home from "./pages/home/home.view";
 import {
   BrowserRouter as Router,
   Link,
   Switch,
   Route,
 } from "react-router-dom";
+import Home from "./pages/home/home.view";
 import PinForm from "./components/pinForm/pinForm.view";
 import ListPins from "./components/listPins/listPins.view";
 import Board from "./components/board/board.view";
