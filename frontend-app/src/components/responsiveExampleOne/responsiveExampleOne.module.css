@@ -1,0 +1,19 @@
+.content {
+    width: 800px;
+    background-color: darkblue;
+    height: 500px;
+}
+
+.content p {
+    color: white;
+}
+
+@media only screen and (max-width: 600px) {
+    .content {
+        width: 200px;
+        background-color: darkcyan;
+    }
+    .content p {
+        color: black;
+    }
+}
