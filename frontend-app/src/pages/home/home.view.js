@@ -1,11 +1,14 @@
 import React from 'react';
-import ResponsiveExampleOne from '../../components/responsiveExampleOne/responsiveExampleOne.view';
+import CloudinaryContext from 'cloudinary-react/lib/components/CloudinaryContext';
+
+import UploadPhoto from '../../components/uploadPhoto/uploadPhoto.view';
+import { cloudName, uploadPreset } from '../../contants/cloudinary';
 
 const Home = () => {
     return (
-        <div>
-            <ResponsiveExampleOne />
-        </div>
+        <CloudinaryContext cloudName={cloudName} uploadPreset={uploadPreset}>
+            <UploadPhoto />
+        </CloudinaryContext>
     );
 };
 

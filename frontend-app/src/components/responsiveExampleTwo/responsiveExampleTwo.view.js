@@ -3,7 +3,8 @@ import { useMediaQuery } from 'react-responsive/src';
 import MediaQuery from 'react-responsive/src/Component';
 
 // https://www.npmjs.com/package/react-responsive
-const ResponsiveExampleTwo = () => {
+
+const ResponsiveExampleTwo = ({ desktop, mobile }) => {
     const isDesktop = useMediaQuery({
         query: '(min-width: 1224px)',
     });

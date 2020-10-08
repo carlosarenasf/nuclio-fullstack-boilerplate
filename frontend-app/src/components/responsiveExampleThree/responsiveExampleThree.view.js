@@ -1,9 +1,10 @@
 import React from 'react';
 import useResponsive from '../../hooks/useResponsive';
 
-// https://usehooks.com/useWindowSize/
+//
+
 const ResponsiveExampleThree = () => {
-    const { windowSize, isDesktop, isMobile } = useResponsive();
+    const { windowSize, isDesktop, isMobile, isSmallDesktop } = useResponsive();
 
     return (
         <div>
@@ -14,6 +15,8 @@ const ResponsiveExampleThree = () => {
                     <p>You are a desktop or laptop</p>
                 </>
             )}
+
+            {isSmallDesktop && <p>You are smal desktop</p>}
             {isMobile && <p>You are a tablet or mobile phone</p>}
         </div>
     );
