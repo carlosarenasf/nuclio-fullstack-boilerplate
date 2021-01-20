@@ -30,6 +30,7 @@
                 ]
             }
         ],
+        "react/prop-types": "off",
         "no-param-reassign": "off",
         "no-underscore-dangle": "off",
         "prettier/prettier": "error",

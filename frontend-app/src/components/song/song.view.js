@@ -1,74 +1,62 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+import { PlayerContext } from '../../context/playerContext';
+import { playerActions } from '../../reducers/playerReducer';
+import styles from './song.module.css';
 
 const Song = () => {
-    const [song, setSong] = useState();
-    const [ctx, setCtx] = useState(new AudioContext());
-    const [currentPlay, setCurrentPlay] = useState();
+  const { state, dispatch } = useContext(PlayerContext);
 
-    useEffect(() => {
-        const url = 'http://localhost:3001/track/5fbe12e2f2ae5bb7e9d1c458';
+  useEffect(() => {
+    const url = 'http://localhost:3001/song/';
 
-        // fetch(url)
-        //     .then((response) => {
-        //         if (response.status === 200) {
-        //             return response;
-        //         }
-        //         return Promise.reject(response.status);
-        //     })
-        //     .then((data) => data.arrayBuffer())
-        //     .then((arrayBuffer) => ctx.decodeAudioData(arrayBuffer))
-        //     .then((decodedAudio) => {
-        //         setSong(decodedAudio);
-        //     });
-
-        const options = {
-            method: 'GET',
-            headers: new Headers({
-                Accept: 'mp3',
-            }),
-            mode: 'cors',
-        };
-
-        fetch(url, options)
-            .then((response) => {
-                if (response.status === 200) {
-                    return response;
-                }
-                return Promise.reject(response.status);
-            })
-            .then((payload) => {
-                // eslint-disable-next-line no-debugger
-                debugger;
-                setSong(payload.body);
-            })
-            .catch((error) => {
-                // eslint-disable-next-line no-debugger
-                debugger;
-                console.log(error);
-            });
-    }, []);
-
-    const playback = () => {
-        const playSound = ctx.createBufferSource();
-        playSound.buffer = song;
-        playSound.connect(ctx.destination);
-        playSound.start(ctx.currentTime);
-        setCurrentPlay(playSound);
+    const options = {
+      method: 'GET',
+      headers: new Headers({
+        Accept: 'application/json',
+      }),
+      mode: 'cors',
     };
 
-    return (
-        <div>
-            {song && (
-                <>
-                    <p>song</p>
-                    <audio>
-                        <source src={song} />
-                    </audio>
-                </>
-            )}
-            <input type="button" value="play" onClick={playback} />
-        </div>
-    );
+    fetch(url, options)
+      .then((response) => {
+        if (response.status === 200) {
+          return response.json();
+        }
+        return Promise.reject(response.status);
+      })
+      .then((payload) => {
+        // eslint-disable-next-line no-debugger
+        debugger;
+        dispatch({ type: playerActions.LOAD_SONGS, songs: payload });
+      })
+      .catch((error) => {
+        // eslint-disable-next-line no-debugger
+        debugger;
+        console.log(error);
+      });
+  }, []);
+
+  return (
+    <div className={styles._songs}>
+      <h1>Playlist</h1>
+      {state.songToReproduce &&
+        state.songToReproduce.map((song, index) => (
+          <div className={styles._song_card}>
+            <span>Name: {song.name}</span>{' '}
+            <input
+              type="button"
+              value="Play"
+              onClick={() => dispatch({ type: playerActions.REPRODUCE_IT_SONG, index })}
+            />{' '}
+            <input
+              type="button"
+              value="Add to player"
+              onClick={() => dispatch({ type: playerActions.ADD_SONG, song })}
+            />
+          </div>
+        ))}
+    </div>
+  );
 };
 
 export default Song;
